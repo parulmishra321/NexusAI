@@ -1,13 +1,13 @@
-﻿# NexusAI – Advanced Multi-Agent Assistant & Computational Linguistics Engine
+# NexusAI – Advanced Multi-Agent Assistant & Computational Linguistics Engine
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/Version-2.1.0-blue.svg?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-Passing%20(100%25)-brightgreen.svg?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)
-![WordNet](https://img.shields.io/badge/WordNet-NLTK%203.0-orange.svg?style=for-the-badge)
-![Ollama](https://img.shields.io/badge/LLM-Ollama%20%7C%20Llama%203-black.svg?style=for-the-badge&logo=ollama&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
+[![Version](https://img.shields.io/badge/Version-2.1.0-blue.svg?style=for-the-badge)](https://github.com/parulmishra321/NexusAI/releases)
+[![Tests](https://img.shields.io/badge/Tests-Passing%20(100%25)-brightgreen.svg?style=for-the-badge)](#diagnostic-tests)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![WordNet](https://img.shields.io/badge/WordNet-NLTK%203.0-orange.svg?style=for-the-badge)](https://nltk.org/howto/wordnet.html)
+[![Ollama](https://img.shields.io/badge/LLM-Ollama%20%7C%20Llama%203-black.svg?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
   <b>A modular, offline-first desktop AI assistant combining Multi-Agent Orchestration, Local Vector RAG, and Formal Computational Semantics.</b>
@@ -242,6 +242,27 @@ python semantics_cli.py --demo
 # Run Full Test Suite
 python -m unittest tests/test_semantics.py -v
 ```
+
+---
+
+<a id="diagnostic-tests"></a>
+## 🧪 Diagnostic Tests
+
+NexusAI includes an automated test suite verifying lexical retrieval, WSD, ERG MRS parsing, FOL translation, and multi-agent routing:
+
+```bash
+# Execute full test suite
+python -m unittest tests/test_semantics.py -v
+```
+
+| Test Suite | Target Component | Test Cases | Status |
+| :--- | :--- | :---: | :---: |
+| `TestWordNetModule` | [`WordNetModule.py`](Backend/Core/Semantics/WordNetModule.py) | 8 | ✅ Passing |
+| `TestLLMSenseSelector` | [`LLMSenseSelector.py`](Backend/Core/Semantics/LLMSenseSelector.py) | 3 | ✅ Passing |
+| `TestSemanticParser` | [`SemanticParser.py`](Backend/Core/Semantics/SemanticParser.py) | 5 | ✅ Passing |
+| `TestSemanticsService` | [`SemanticsService.py`](Backend/Core/Semantics/SemanticsService.py) | 3 | ✅ Passing |
+| `TestAgentAndPipelineIntegration` | Orchestrator, SemanticsAgent, RAGAgent | 5 | ✅ Passing |
+| **Total** | **All Verification Suites** | **24** | **100% Pass** |
 
 ---
 
