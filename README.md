@@ -5,7 +5,7 @@
 [![Version](https://img.shields.io/badge/Version-2.1.0-blue.svg?style=for-the-badge)](https://github.com/parulmishra321/NexusAI/releases)
 [![Tests](https://img.shields.io/badge/Tests-Passing%20(100%25)-brightgreen.svg?style=for-the-badge)](#diagnostic-tests)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![WordNet](https://img.shields.io/badge/WordNet-NLTK%203.0-orange.svg?style=for-the-badge)](https://nltk.org/howto/wordnet.html)
+[![WordNet](https://img.shields.io/badge/WordNet-NLTK%203.0-orange.svg?style=for-the-badge)](https://www.nltk.org/api/nltk.corpus.reader.wordnet.html)
 [![Ollama](https://img.shields.io/badge/LLM-Ollama%20%7C%20Llama%203-black.svg?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
