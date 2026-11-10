@@ -1,0 +1,8 @@
+python-dotenv
+PyQt5
+chromadb>=0.4.15
+ollama
+rich
+pydantic-settings
+groq
+nltk>=3.8.1

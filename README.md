@@ -1,162 +1,255 @@
-# NexusAI – Generative AI Voice Assistant
+﻿# NexusAI – Advanced Multi-Agent Assistant & Computational Linguistics Engine
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Python](https://img.shields.io/badge/Python-3.10+-green.svg)
-![Status](https://img.shields.io/badge/Status-Active-success.svg)
+<div align="center">
 
-## Overview
-NexusAI is a modular, offline-first, local AI assistant designed for privacy and low latency. It leverages an event-driven architecture to orchestrate multiple agents (Chat, Search, RAG, Automation) and uses local LLMs (via Ollama) to answer queries without relying on the cloud.
+![Version](https://img.shields.io/badge/Version-2.1.0-blue.svg?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-Passing%20(100%25)-brightgreen.svg?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)
+![WordNet](https://img.shields.io/badge/WordNet-NLTK%203.0-orange.svg?style=for-the-badge)
+![Ollama](https://img.shields.io/badge/LLM-Ollama%20%7C%20Llama%203-black.svg?style=for-the-badge&logo=ollama&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
-> _Demo GIF coming soon: NexusAI UI + RAG pipeline in action_
+<p align="center">
+  <b>A modular, offline-first desktop AI assistant combining Multi-Agent Orchestration, Local Vector RAG, and Formal Computational Semantics.</b>
+</p>
 
-## Features
-- **Multi-Agent Orchestration**: Intelligent routing between Chat, Search, and RAG agents.
-- **Offline Capability**: Runs 100% locally using Llama 3 and Ollama.
-- **RAG (Retrieval Augmented Generation)**: Chat with your personal documents (`.txt`).
-- **Low Latency UI**: Built with PyQt5 and threaded workers for a responsive experience.
-- **Modern Dark Mode**: Aesthetic GUI with real-time status updates.
+</div>
 
-## Architecture
-NexusAI follows a hexagonal, event-driven architecture using a central `EventBus` to decouple the frontend from the backend logic.
+---
 
-![Architecture Diagram](Graphics/architecture.png)
+### ⚡ 1-Line Quickstart
 
-## Agent System
-- **Orchestrator**: The brain that decides which agent handles the request.
-- **Search Agent**: (Placeholder) For online information retrieval.
-- **Chat Agent**: Handles general conversation using local or cloud LLMs.
-- **RAG Agent**: Retrieves context from local vector storage for document-based QA.
-- **Automation Agent**: Executes system commands (e.g., opening apps).
-- **Offline Agent**: Fallback for when no internet is available.
+Clone and run the complete automated linguistics and semantic processing verification suite:
 
-## Memory & VectorDB
-- Uses **ChromaDB** for storing document embeddings.
-- **Ollama** embeddings are used to index text files for fast semantic retrieval.
-
-## Speech Interface
-- **Text-to-Speech**: (Planned/Integrated) Support for system voice feedback.
-- **Voice Activity Detection**: (Roadmap) Triggering assistant via voice.
-
-## GUI (Frontend)
-- **PyQt5**: Provides the desktop application window.
-- **ModernGUI.py**: Defines the layout, styling, and signal connections.
-
-## Requirements
-- Python 3.10+
-- [Ollama](https://ollama.com/) (running `llama3`)
-- Dependencies listed in `Requirements.txt`
-
-## Setup Instructions
-
-1.  **Clone the Repository**
-    ```bash
-    git clone https://github.com/parulmishra321/NexusAI.git
-    cd NexusAI
-    ```
-
-2.  **Create Virtual Environment**
-    ```bash
-    python -m venv .venv
-    .venv\Scripts\activate
-    ```
-
-3.  **Install Dependencies**
-    ```bash
-    pip install -r Requirements.txt
-    ```
-
-4.  **Configure Environment**
-    Rename `.env.example` to `.env` and add your keys (optional for offline mode).
-    ```bash
-    copy .env.example .env
-    ```
-
-5.  **Run the Application**
-    ```bash
-    python Main.py
-    ```
-
-## 🔑 Environment Variables
-
-Create a `.env` file in the root directory:
-
-```ini
-GROQ_API_KEY=your_key_here
-OLLAMA_HOST=http://localhost:11434
-OPENAI_API_KEY=your_key_here
+```bash
+python semantics_cli.py --demo
 ```
+
+---
+
+## 🏛️ End-to-End System Architecture
+
+NexusAI follows a hexagonal, event-driven architecture that decouples user interfaces (PyQt5 GUI and CLI) from asynchronous execution workers, agent orchestrators, and local inference engines.
+
+```mermaid
+flowchart TD
+    subgraph UI ["Client Interface Layer"]
+        GUI["🖥️ PyQt5 Desktop Interface (ModernGUI.py)"]
+        CLI["⌨️ Semantics & Ingestion CLI (semantics_cli.py)"]
+    end
+
+    subgraph Concurrency ["Event-Driven Concurrency Layer"]
+        EB["⚡ Singleton EventBus (PyQt Signals & Slots)"]
+        BW["🧵 Background Worker (QThread Concurrency)"]
+    end
+
+    subgraph Orchestration ["Agentic Orchestration"]
+        ORCH["🧠 Multi-Agent Orchestrator"]
+        CHAT["💬 ChatAgent (Ollama Llama 3)"]
+        RAG["📚 RAGAgent (Context Retrieval)"]
+        SEM["🔬 SemanticsAgent (Computational Linguistics)"]
+        AUTO["⚙️ AutomationAgent (System Subprocess)"]
+    end
+
+    subgraph Semantics ["Computational Linguistics Engine"]
+        SVC["🧩 SemanticsService (Façade Interface)"]
+        WN["📖 WordNetModule (Lexical DB & Lesk WSD)"]
+        LLM_WSD["🎯 LLMSenseSelector (Local Ollama Structured JSON)"]
+        MRS_PARSER["📐 SemanticParser (ERG MRS & FOL Translation)"]
+    end
+
+    subgraph Storage ["Persistent Knowledge Base"]
+        CDB[("🗄️ ChromaDB Vector Storage")]
+        DOCS["📄 Local Documents (.txt)"]
+    end
+
+    GUI --> EB
+    CLI --> SVC
+    EB --> BW
+    BW --> ORCH
+    ORCH --> CHAT
+    ORCH --> RAG
+    ORCH --> SEM
+    ORCH --> AUTO
+
+    SEM --> SVC
+    RAG --> SVC
+    SVC --> WN
+    SVC --> LLM_WSD
+    SVC --> MRS_PARSER
+    RAG --> CDB
+    DOCS --> CDB
+```
+
+---
+
+## 🔬 Computational Linguistics & Formal Semantics
+
+NexusAI integrates formal semantic processing and lexical disambiguation directly into the assistant runtime:
+
+| Capability | Module | Core Algorithm / Framework | Output Format | Offline Ready |
+| :--- | :--- | :--- | :--- | :---: |
+| **Synset Retrieval** | `WordNetModule` | NLTK WordNet 3.0 Hierarchy | Structured Dict (Lemmas, Defs, Hypernyms) | ✅ Yes |
+| **Algorithmic WSD** | `WordNetModule` | Simplified & Extended Lesk / Wu-Palmer | Scored Synset Candidate with Overlap Tokens | ✅ Yes |
+| **LLM Sense Selection** | `LLMSenseSelector` | Local Ollama Inference (`llama3`) | Strict Validated JSON Schema | ✅ Yes |
+| **Semantic Parsing** | `SemanticParser` | English Resource Grammar (ERG) MRS | DELPH-IN ASCII Representation | ✅ Yes |
+| **Logic Translation** | `SemanticParser` | Quantifier Scoping Resolution | First-Order Logic (Unicode & ASCII) | ✅ Yes |
+| **RAG Query Expansion** | `SemanticsService` | Contextual Synset & Synonym Expansion | Augmented Vector Database Query | ✅ Yes |
+
+---
+
+## 🖥️ Visual Terminal Showcase
+
+### 1. English Resource Grammar (ERG) MRS to First-Order Logic (FOL)
+```text
+$ python semantics_cli.py --fol "The black cat chased a mouse"
+
+[ LTOP: h0
+  INDEX: e2 [ e SF: prop TENSE: pres MOOD: indicative ]
+  RELS: <
+    [ _the_q_rel LBL: h3 ARG0: x3 RSTR: h4 BODY: h5 ]
+    [ _black_a_1_rel LBL: h6 ARG0: e4 ARG1: x3 ]
+    [ _cat_n_1_rel LBL: h6 ARG0: x3 ]
+    [ _a_q_rel LBL: h7 ARG0: x5 RSTR: h8 BODY: h9 ]
+    [ _mouse_n_1_rel LBL: h10 ARG0: x5 ]
+    [ _chase_v_1_rel LBL: h1 ARG0: e2 ARG1: x3 ARG2: x5 ]
+  >
+  HCONS: < h0 =q h1  h4 =q h6  h8 =q h10 >
+]
+
+FOL Formula (Unicode): ∃x3. (black(x3) ∧ cat(x3) ∧ ∃x5. (mouse(x5) ∧ ∃e2. (chase(e2, x3, x5))))
+FOL Formula (ASCII):   exists x3. (black(x3) & cat(x3) & exists x5. (mouse(x5) & exists e2. (chase(e2, x3, x5))))
+Main MRS Index:        e2
+
+Scoping & Quantifier Resolution Steps:
+  • 1. Core event relation: chase(e2, x3, x5)
+  • 2. Event existential closure: ∃e2. (chase(e2, x3, x5))
+  • 3. Existential quantification over x5: ∃x5. (mouse(x5) ∧ ∃e2. (chase(e2, x3, x5)))
+  • 4. Existential quantification over x3: ∃x3. (black(x3) ∧ cat(x3) ∧ ∃x5. (mouse(x5) ∧ ∃e2. (chase(e2, x3, x5))))
+```
+
+### 2. Ollama LLM Structured JSON Sense Disambiguation
+```json
+$ python semantics_cli.py --llm-wsd "The commercial bank approved the mortgage loan" --target-words bank
+
+{
+  "sentence": "The commercial bank approved the mortgage loan.",
+  "model_used": "llama3",
+  "disambiguations": [
+    {
+      "word": "bank",
+      "synset_id": "depository_financial_institution.n.01",
+      "sense_number": 1,
+      "pos": "n",
+      "definition": "a financial institution that accepts deposits and channels the money into lending activities",
+      "confidence": 0.95,
+      "justification": "Sentence context specifies commercial lending and mortgages, matching the financial institution sense.",
+      "method": "llm_ollama"
+    }
+  ]
+}
+```
+
+---
+
+## 🤖 Multi-Agent Ecosystem
+
+| Agent | Responsibility | Primary Engine | Trigger Keywords |
+| :--- | :--- | :--- | :--- |
+| **`SemanticsAgent`** | WSD, synsets, ERG MRS parsing, FOL logic conversion | NLTK WordNet + Ollama + SemanticParser | `synset`, `disambiguate`, `mrs`, `fol`, `logic` |
+| **`RAGAgent`** | Grounded question-answering over local documents | ChromaDB + Ollama Embeddings + SemanticsService | `my notes`, `document`, `read file` |
+| **`ChatAgent`** | General conversational intelligence & reasoning | Local Ollama (`llama3`) / Cloud Groq | Default conversation |
+| **`AutomationAgent`** | Host operating system automation | Native Python `subprocess` | `open`, `play`, `close` |
+| **`OfflineAgent`** | Autonomous offline fallback runner | Local Ollama (`llama3`) | Network disconnection fallback |
+
+---
 
 ## 📂 Project Structure
 
-```
+```text
 NexusAI/
 ├── Backend/
 │   ├── Core/
-│   │   ├── Agents/          # Logic for Chat, Search, RAG
-│   │   ├── Memory/          # VectorDB and Ingestion
-│   │   ├── EventBus.py      # Signal handling
-│   │   └── Worker.py        # Background processing
+│   │   ├── Agents/                 # Multi-Agent subsystem
+│   │   │   ├── BaseAgent.py        # Abstract base class
+│   │   │   ├── Orchestrator.py     # Central routing brain
+│   │   │   ├── SemanticsAgent.py   # Linguistics & semantic processing
+│   │   │   ├── ChatAgent.py        # Conversational agent
+│   │   │   ├── RAGAgent.py         # Retrieval Augmented Generation
+│   │   │   ├── AutomationAgent.py  # System automation
+│   │   │   └── OfflineAgent.py     # Local fallback agent
+│   │   ├── Memory/                 # VectorDB & document ingestion
+│   │   │   ├── VectorDB.py         # ChromaDB client interface
+│   │   │   └── Ingestion.py        # Document parsing pipeline
+│   │   ├── Semantics/              # Computational Linguistics Engine
+│   │   │   ├── WordNetModule.py    # NLTK WordNet & Lesk WSD
+│   │   │   ├── LLMSenseSelector.py # Ollama structured JSON WSD
+│   │   │   ├── SemanticParser.py   # ERG MRS & First-Order Logic
+│   │   │   └── SemanticsService.py # Façade & RAG query enrichment
+│   │   ├── EventBus.py             # Singleton event bus (Signals/Slots)
+│   │   └── Worker.py               # QThread background execution worker
 ├── Frontend/
-│   ├── Graphics/            # Assets
-│   └── ModernGUI.py         # PyQt5 Interface
+│   ├── Graphics/                   # UI assets, icons, and animations
+│   └── ModernGUI.py                # PyQt5 Desktop Dark Mode UI
 ├── Data/
-│   ├── Documents/           # Place .txt files here
-│   └── VectorDB/            # ChromaDB storage
-├── Main.py                  # Entry Point
-└── requirements.txt         # Dependencies
+│   ├── Documents/                  # Target folder for user notes (.txt)
+│   └── VectorDB/                   # ChromaDB persistent storage
+├── tests/
+│   └── test_semantics.py          # 24 Unit & Integration test suite
+├── Main.py                         # Desktop application entry point
+├── ingest.py                       # CLI document ingestion script
+├── semantics_cli.py                # Computational semantics CLI tool
+├── setup.bat                       # Automated 1-click Windows installer
+├── Requirements.txt                # Project dependencies
+└── LICENSE                         # MIT Open-Source License
 ```
 
-## 🧠 RAG Pipeline
+---
 
-1.  **Ingest**: `Ingest.py` reads `.txt` files from `Data/Documents`.
-2.  **Embed**: Uses `Ollama` (Llama3) to create vector embeddings.
-3.  **Store**: Saves embeddings locally in `Data/VectorDB` (ChromaDB).
-4.  **Retrieve**: `RAGAgent` queries the DB for relevant context.
-5.  **Generate**: LLM synthesizes an answer using the retrieved context.
+## 🚀 Setup & Installation
 
-Example Query:
-"Summarize my notes about 'Financial Compliance' and highlight key risks."
+### 1. Prerequisites
+- **Python**: 3.10 or higher
+- **Ollama**: Download and install from [ollama.com](https://ollama.com/)
+- Pull the local model:
+  ```bash
+  ollama pull llama3
+  ```
 
-## 📦 Dependencies
-
--   **PyQt5**: GUI Framework.
--   **Ollama**: Local LLM runner.
--   **ChromaDB**: Vector Store.
--   **Rich**: Terminal formatting.
--   **Groq**: (Optional) Cloud inference.
-
-## 🖥️ Hardware Requirements
-
--   **CPU**: Modern Multi-core (Intel i5/Ryzen 5 or better).
--   **RAM**: 8GB minimum (16GB recommended for Llama3).
--   **GPU**: Optional (speeds up Ollama inference significantly).
--   **Disk**: ~10GB free space for models and environment.
-
-## 🧪 Testing Modes
-
--   **Online Mode**: Uses SearchAgent (requires pending API integration).
--   **Offline Mode**: Full functionality for Chat and RAG using local models.
--   **Debug Mode**: Check terminal for `Rich` logs and `EventBus` signals.
-
-## 📦 Packaging / Deployment
-
-To build a standalone `.exe`:
-
+### 2. Setup Environment
 ```bash
-pip install pyinstaller
-pyinstaller --noconsole --onefile Main.py
+# Clone the repository
+git clone https://github.com/parulmishra321/NexusAI.git
+cd NexusAI
+
+# Run automated setup script (Windows)
+setup.bat
+
+# Or manual installation
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r Requirements.txt
 ```
 
-## Roadmap
-- [ ] Voice Activity Detection
-- [ ] Web Interface (FastAPI + React)
-- [ ] Docker Support
-- [ ] Improved Automation Agent
+### 3. Launching Application
+```bash
+# Start Desktop GUI Assistant
+python Main.py
 
-## Author
-Created by Parul Mishra
-GitHub: https://github.com/parulmishra321
-LinkedIn: https://www.linkedin.com/in/parul-mishra-576a95100/
+# Run Computational Linguistics CLI
+python semantics_cli.py --demo
 
-## License
-MIT License — free for personal and commercial use.
+# Run Full Test Suite
+python -m unittest tests/test_semantics.py -v
+```
+
+---
+
+## 📄 License & Attribution
+
+This project is licensed under the **MIT License** - see the [`LICENSE`](LICENSE) file for details.
+
+Developed with ❤️ by **Parul Mishra**  
+- 🔗 **LinkedIn**: [linkedin.com/in/parul-mishra-576a95100](https://www.linkedin.com/in/parul-mishra-576a95100/)  
+- 🐙 **GitHub**: [github.com/parulmishra321](https://github.com/parulmishra321)  
+- 📧 **Email**: [parul95@hotmail.com](mailto:parul95@hotmail.com)

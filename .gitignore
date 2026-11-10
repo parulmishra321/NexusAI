@@ -1,0 +1,21 @@
+# Virtual Environment & Environment Config
+.venv/
+.env
+*.env
+
+# Python Cache
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# ChromaDB & Vector Store Persistence
+Data/VectorDB/
+**/VectorDB/
+*.sqlite3
+*.parquet
+
+# User Uploaded Documents
+Data/Documents/*
+!Data/Documents/.gitkeep
